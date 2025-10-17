@@ -1,0 +1,75 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab01</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <p id="name">Makhneva Irina Alexandrovna</p>
+    <p id="group">P3217</p>
+    <p id="variant">Variant: 489568</p>
+</header>
+<main>
+    <div class = "leftSection">
+        <img id="image" src = "img/img.png" alt = "Заданная область на координатной плоскости"/>
+        <div id="submitContainer">
+            <form id="inputForm">
+                <div id="inputContainer">
+                    <label class="inputLabel">Enter X
+                        <input id="inputX" type="number" step="any">
+                    </label>
+                    <label class="inputLabel">Select Y
+                        <select id="selectY">
+                            <option></option>
+                            <option>-5</option>
+                            <option>-4</option>
+                            <option>-3</option>
+                            <option>-2</option>
+                            <option>-1</option>
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                    </label>
+                    <label class="inputLabel">Enter R
+                        <input id="inputR" type="number" step="any">
+                    </label>
+                </div>
+                <button id="submit" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class = "rightSection">
+        <div class="allSubmits">
+            <h3>All submits</h3>
+            <div class="scroll">
+                <table>
+                    <thead>
+                    <tr>
+                        <th id="firstCell">X</th>
+                        <th>Y</th>
+                        <th>R</th>
+                        <th>Result</th>
+                        <th>Current time</th>
+                        <th id="lastCell">Execution time</th>
+                    </tr>
+                    </thead>
+                    <tbody id="result">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="popUp">
+        <h3>Error</h3>
+        <span id="errorMessage"></span>
+        <button class="close-button">&#x2715</button>
+    </div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

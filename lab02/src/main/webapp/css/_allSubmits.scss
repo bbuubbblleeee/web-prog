@@ -1,0 +1,35 @@
+.allSubmits{
+  background-color: #1e1e1e;
+  border-radius: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+
+  margin-right: 10px;
+  width: 100%;
+
+}
+
+.allSubmits h3 {
+  font-weight: normal;
+  font-size: 1.5rem;
+}
+.scroll{
+  overflow-y: auto;
+  width: 100%;
+}
+
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}

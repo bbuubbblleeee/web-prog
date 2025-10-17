@@ -1,0 +1,19 @@
+@use 'mainHomePage';
+@use 'allSubmits';
+@use 'table';
+
+.allSubmits{
+  margin: 15px 15px 15px;
+  height: calc(100% - 30px);
+  text-align: center;
+}
+
+.allSubmits h3 {
+  text-align: left;
+}
+
+#link-to-home-page{
+  color: #3399fe;
+  display: block;
+  margin-top: 20px;
+}
