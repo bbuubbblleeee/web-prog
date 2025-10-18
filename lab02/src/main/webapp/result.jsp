@@ -24,7 +24,7 @@
                 </tr>
                 </thead>
                 <tbody id="result">
-                <c:forEach items="${requestScope.currentHistory.allRequests}" var="request">
+                <c:forEach items="${currentHistory.allRequests}" var="request">
                     <tr>
                         <td><fmt:formatNumber value="${request.x}" pattern="#.#######"/></td>
                         <td><fmt:formatNumber value="${request.y}" pattern="#.#######"/></td>
