@@ -65,7 +65,7 @@ public class AreaCheckServlet extends HttpServlet {
                 ));
                 saveCurrentHistory(map, request);
             }
-            request.setAttribute("currentHistory", currentHistory);
+//            request.setAttribute("currentHistory", currentHistory);
             saveSessionHistory(request);
 
             String source = request.getParameter("source");
@@ -114,7 +114,7 @@ public class AreaCheckServlet extends HttpServlet {
         for (RequestBean requestBean : currentHistory.getAllRequests()){
             sessionHistory.add(requestBean);
         }
-        request.getSession().setAttribute("sessionHistory", sessionHistory);
+//        request.getSession().setAttribute("sessionHistory", sessionHistory);
     }
 
 

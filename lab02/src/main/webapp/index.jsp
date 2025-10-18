@@ -118,7 +118,7 @@
                     </tr>
                     </thead>
                     <tbody id="result">
-                    <c:forEach items="${sessionScope.sessionHistory.allRequests}" var="request">
+                    <c:forEach items="${sessionHistory.allRequests}" var="request">
                         <fmt:setLocale value="en_US" scope="session"/>
                         <tr>
                             <td><fmt:formatNumber value="${request.x}" pattern="#.#######"/></td>
