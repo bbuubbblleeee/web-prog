@@ -20,14 +20,16 @@ public class RequestHandler implements Serializable {
     private Point point;
 
     public void addPoint(){
+//        long startTime = System.nanoTime();
         System.out.println("addPoint called!!");
+//        point.setR(point.getR() + 2);
 //        Point newPoint = new Point();
 //        newPoint.setX(point.getX());
 //        newPoint.setY(point.getY());
 //        newPoint.setR(point.getR());
-//        newPoint.setResult(point.isResult());
+//        newPoint.setResult(new MathematicalCalculations().ifHits());
 //        newPoint.setCurrentTime(LocalDateTime.now());
-////        newPoint.setExecutionTime(point.getExecutionTime());
+//        newPoint.setExecutionTime(System.nanoTime() - startTime);
 //        history.add(newPoint);
     }
 }

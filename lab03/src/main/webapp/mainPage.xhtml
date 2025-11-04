@@ -49,11 +49,13 @@
             </div>
 
             <p:commandButton id="submit-button" value="Check Point" icon="far fa-check-circle" onclick="executeCalculation(); return false;"/>
+            <p:remoteCommand name="executeCalculation"
+                             actionListener="#{requestHandler.addPoint}"
+                             process="@form"
+                             update=":target-panel"/>
         </h:form>
-        <p:remoteCommand name="executeCalculation"
-                         action="#{requestHandler.addPoint}"
-                         update=":target-panel"
-                        process="input-form"/> <p:outputPanel id="target-panel" layout="block">
+
+        <p:outputPanel id="target-panel" layout="block">
         <h:outputText value="R value: #{point.r}"/>
     </p:outputPanel>
 
@@ -147,13 +149,25 @@
 
     <div id="table-container">
         <h3>All submits</h3>
-        <p:dataTable id="result-table" styleClass="table" lazy="false">
-            <p:column headerText="X"/>
-            <p:column headerText="Y"/>
-            <p:column headerText="R"/>
-            <p:column headerText="Result"/>
-            <p:column headerText="Current time"/>
-            <p:column headerText="Execution time"/>
+        <p:dataTable id="result-table" styleClass="table" lazy="false" value="#{history.allRequests}" var="point">
+<!--            <p:column headerText="X" sortBy="#{point.x}">-->
+<!--                <h:outputText value="#{point.x}"/>-->
+<!--            </p:column>-->
+<!--            <p:column headerText="Y" sortBy="#{point.y}">-->
+<!--                <h:outputText value="#{point.y}"/>-->
+<!--            </p:column>-->
+<!--            <p:column headerText="R" sortBy="#{point.r}">-->
+<!--                <h:outputText value="#{point.r}"/>-->
+<!--            </p:column>-->
+<!--            <p:column headerText="Result" sortBy="#{point.result}">-->
+<!--                <h:outputText value="#{point.result}"/>-->
+<!--            </p:column>-->
+<!--            <p:column headerText="Current time" sortBy="#{point.currentTime}">-->
+<!--                <h:outputText value="#{point.currentTime}"/>-->
+<!--            </p:column>-->
+<!--            <p:column headerText="Execution time" sortBy="#{point.executionTime}">-->
+<!--                <h:outputText value="#{point.executionTime}"/>-->
+<!--            </p:column>-->
         </p:dataTable>
     </div>
 </h:body>
