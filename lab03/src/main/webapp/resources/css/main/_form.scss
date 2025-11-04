@@ -1,0 +1,174 @@
+@import "variables";
+#input-form\:form-label {
+  font-size: 20px;
+}
+
+#input-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+
+  background-color: $element-background-color;
+  padding: 20px;
+  border-radius: 12px;
+
+  height: fit-content;
+  flex-shrink: 1;
+  flex-grow: 1;
+  //min-width: 200px;
+  label, #x-links span{
+    font-size: 16px;
+  }
+  h3 {
+    font-size: 20px;
+    margin: 5px 0;
+    color: $header-text-color;
+  }
+  #y-input #input-form\:y_input{
+    background-color: $input-background-color;
+    border: 0;
+    color: $back-text-color;
+    width: 100%;
+    &.ui-inputfield {
+      border-radius: 0.4rem;
+    }
+    &.ui-state-focus {
+      box-shadow: 0 0 5px .1em $accent-color;
+    }
+  }
+}
+
+#x-values {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  //width: 100%;
+  //flex-shrink: 1;
+  //flex-grow: 1;
+  a {
+    display: flex;
+    //font-size: 16px;
+    border-radius: 0.4rem;
+    padding: 5px 14px;
+    background-color: $input-background-color;
+    text-decoration: none;
+    color: $back-text-color;
+    &:hover {
+      background-color: $accent-color;
+      color: $main-text-color;
+      box-shadow: 0 0 10px $accent-color;
+    }
+
+  }
+}
+
+
+
+//#r-select {
+//  #input-form\:r {
+//    #input-form\:r_input {
+//      #input-form\:r_input > option:nth-child(2) {
+//        background-color: $input-background-color !important;
+//
+//      }
+//
+//    }
+//  }
+//}
+
+#input-form\:r.ui-selectonemenu {
+  background-color: $input-background-color;
+  border: 0;
+  border-radius: 0.4rem;
+
+  #input-form\:r_label {
+    color: $back-text-color !important;
+  }
+  &.ui-state-focus {
+    box-shadow: 0 0 5px .1em $accent-color;
+  }
+}
+
+
+.ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-items {
+  padding: 0;
+  .ui-selectonemenu-item {
+    background-color: $input-background-color;
+    color: $back-text-color;
+    &.ui-state-highlight {
+      background-color: $accent-color;
+    }
+    &:hover {
+      background-color: $accent-color;
+      color: $back-text-color;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #20272e;
+
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #181c22;
+
+}
+
+.ui-selectonemenu-panel .ui-selectonemenu-item:first-child {
+  pointer-events: none;
+  color: $disabled-text-color !important;
+}
+
+
+#input-form\:submit-button {
+  background-color: $accent-color;
+  border: $accent-color;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
+
+  .ui-button-text {
+    padding-left: 15px;
+    color: $main-text-color;
+  }
+  span.ui-button-icon-left.ui-icon.ui-c.far.fa-check-circle {
+    position: relative;
+    margin: 2px 0 0 0;
+    color: $main-text-color;
+    //justify-content: center;
+    &.ui-state-focus {
+      position: relative;
+      margin: 2px 0 0 0;
+      color: $main-text-color;
+    }
+  }
+  &.ui-state-focus{
+    box-shadow: 0 0 10px $accent-color;
+  }
+}
+//
+//body .ui-button.ui-button-text-icon-left .ui-button-text {
+//  padding-left: 0;
+//}
+
+
+
+
+
+.form-element {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+
+

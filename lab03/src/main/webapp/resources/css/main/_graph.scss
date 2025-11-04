@@ -1,0 +1,18 @@
+@import "variables";
+svg {
+  display: block;
+  //padding: 5px;
+  background-color: $input-background-color;
+  border-radius: 8px;
+  //opacity: 0.5;
+}
+
+#graph-container {
+  background-color: $element-background-color;
+  padding: 20px;
+  border-radius: 12px;
+  h3 {
+    margin: 5px 0;
+    font-size: 20px;
+  }
+}

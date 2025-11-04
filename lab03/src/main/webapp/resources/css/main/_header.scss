@@ -1,0 +1,33 @@
+@import "variables";
+
+header {
+  display: flex;
+  justify-content: flex-end;
+  margin: 15px 0 20px 0 ;
+}
+
+header #link-back.ui-linkbutton {
+  border-radius: 0.4rem;
+  border: 0;
+  &.ui-state-focus{
+    box-shadow: 0 0 6px $accent-color;
+  }
+  padding: 4px 8px 4px 16px;
+  background-color: $input-background-color;
+  a {
+    text-decoration: none;
+  }
+  a > span.ui-button-text.ui-c {
+    padding-left: 1rem;
+    padding-right: 0.3rem;
+  }
+  span {
+    &.ui-button-icon-left.ui-icon.ui-c.fas.fa-arrow-left {
+      font-size: 14px;
+      padding-top: 2px;
+    }
+    font-size: 16px;
+    line-height: 1;
+    color: $back-text-color;
+  }
+}

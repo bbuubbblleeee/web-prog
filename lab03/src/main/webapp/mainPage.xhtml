@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <h:outputStylesheet library="css" name="main/mainPage.css"/>
+        <h:outputStylesheet library="webjars" name="font-awesome/5.12.0/css/all.min-jsf.css" />
+        <h:outputStylesheet library="webjars" name="font-awesome/5.12.0/css/v4-shims.min-jsf.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    </h:head>
+<h:body>
+    <header>
+        <p:linkButton id="link-back" href="/app" value="Back to Start Page" icon="fas fa-arrow-left"/>
+<!--        <p:linkButton id="link-back" href="/app" value="Back to Start Page" icon="fas fa-arrow-left"/>-->
+    </header>
+    <div id="form-and-graph">
+        <h:form id="input-form">
+            <h3 id="form-label">Enter coordinates</h3>
+            <div id="x-links" class="form-element">
+                <span>X coordinate</span>
+                <div id="x-values">
+                    <ui:repeat value="#{validationService.x}" var="xVal">
+                        <p:commandLink>
+                            <h:outputText value="#{xVal}">
+                                <f:convertNumber pattern="#.##" locale="en_US"/>
+                            </h:outputText>
+                            <f:setPropertyActionListener target="#{point.x}" value="#{xVal}"/>
+                        </p:commandLink>
+                    </ui:repeat>
+                </div>
+            </div>
+
+            <div id="y-input" class="form-element">
+                <p:outputLabel for="y">Y coordinate</p:outputLabel>
+                <p:inputNumber id="y" value="#{point.y}" minValue="-5" maxValue="5">
+                    <!--            <p:ajax event="blur"/>-->
+                </p:inputNumber>
+            </div>
+
+            <div id="r-select" class="form-element">
+                <p:outputLabel for="r">R radius</p:outputLabel>
+                <p:selectOneMenu id="r" value="#{point.r}" styleClass="custom-select">
+                    <f:selectItem id="select-r-option" itemLabel="Select radius" itemValue="#{null}" noSelectionOption="#{true}" />
+                    <f:selectItems value="#{validationService.r}"/>
+                </p:selectOneMenu>
+            </div>
+
+            <p:commandButton id="submit-button" value="Check Point" icon="far fa-check-circle" onclick="executeCalculation(); return false;"/>
+        </h:form>
+        <p:remoteCommand name="executeCalculation"
+                         action="#{requestHandler.addPoint}"
+                         update=":target-panel"
+                        process="input-form"/> <p:outputPanel id="target-panel" layout="block">
+        <h:outputText value="R value: #{point.r}"/>
+    </p:outputPanel>
+
+        <div id="graph-container">
+            <h3>Coordinate Plane</h3>
+            <svg xmlns="http://www.w3.org/2000/svg"
+                width="480" height="480" id="graph" style="margin-top: 20px">
+            <line x1="15" y1="15" x2="465" y2="15" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="15" y1="15" x2="15" y2="465" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="15" y1="465" x2="465" y2="465" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="465" y1="15" x2="465" y2="465" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+
+            <line x1="60" y1="15" x2="60" y2="465" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="15" y1="60" x2="465" y2="60" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="105" y1="15" x2="105" y2="465" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="15" y1="105" x2="465" y2="105" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+
+            <line x1="150" y1="15" x2="150" y2="465" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="15" y1="150" x2="465" y2="150" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="195" y1="15" x2="195" y2="465" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="15" y1="195" x2="465" y2="195" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+
+            <line x1="240" y1="15" x2="240" y2="465" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="15" y1="240" x2="465" y2="240" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="285" y1="15" x2="285" y2="465" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="15" y1="285" x2="465" y2="285" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+
+            <line x1="330" y1="15" x2="330" y2="465" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="15" y1="330" x2="465" y2="330" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="375" y1="15" x2="375" y2="465" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="15" y1="375" x2="465" y2="375" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+
+            <line x1="420" y1="15" x2="420" y2="465" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="15" y1="420" x2="465" y2="420" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="465" y1="15" x2="465" y2="465" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+            <line x1="15" y1="465" x2="465" y2="465" stroke="#444444" stroke-width="2" stroke-opacity="0.75"/>
+
+
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7"
+                        refX="0" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" fill-opacity="0.65"/>
+                </marker>
+            </defs>
+            <polygon id="triangle" points="240 420, 420 240, 240 240" fill="#8b5cf6" fill-opacity="0.65"/>
+            <polygon id="square" points="240 240, 420 240, 420 150, 240 150" fill="#8b5cf6" fill-opacity="0.65"/>
+            <path d="
+                        M 240 240,
+                        L 150 240,
+                        A 105 105 0 0 1 240 150
+                        Z"
+                  fill="#8b5cf6" fill-opacity="0.65"/>
+
+            <line id="xLine" x1="25" y1="240" x2="440" y2="240" stroke="white" stroke-width="2" marker-end="url(#arrowhead)" stroke-opacity="0.65"/>
+            <line id="yLine" x1="240" y1="455" x2="240" y2="40" stroke="white" stroke-width="2" marker-end="url(#arrowhead)" stroke-opacity="0.65"/>
+
+            <line class="stick" x1="330" y1="233" x2="330" y2="247" stroke="white" stroke-width="2" stroke-opacity="0.65"/>
+            <line class="stick" x1="420" y1="233" x2="420" y2="247" stroke="white" stroke-width="2" stroke-opacity="0.65"/>
+
+            <line class="stick" x1="150" y1="233" x2="150" y2="247" stroke="white" stroke-width="2" stroke-opacity="0.65"/>
+            <line class="stick" x1="60" y1="233" x2="60" y2="247" stroke="white" stroke-width="2" stroke-opacity="0.65"/>
+
+            <line class="stick" x1="233" y1="150" x2="247" y2="150" stroke="white" stroke-width="2" stroke-opacity="0.65"/>
+            <line class="stick" x1="233" y1="60" x2="247" y2="60" stroke="white" stroke-width="2" stroke-opacity="0.65"/>
+
+            <line class="stick" x1="233" y1="330" x2="247" y2="330" stroke="white" stroke-width="2" stroke-opacity="0.65"/>
+            <line class="stick" x1="233" y1="420" x2="247" y2="420" stroke="white" stroke-width="2" stroke-opacity="0.65"/>
+
+            <text class="names" x="450" y="260" fill="white" stroke="white" stroke-width="0">x</text>
+            <text class="names" x="255" y="35" fill="white" stroke="white" stroke-width="0">y</text>
+
+
+            <text class="rDiv2" x="330" y="265" fill="white" stroke="white" stroke-width="0" text-anchor="middle" fill-opacity="0.65">R/2</text>
+            <text class="rDiv2" x="225" y="155" fill="white" stroke="white" stroke-width="0" text-anchor="end" fill-opacity="0.65">R/2</text>
+
+            <text class="-rDiv2" x="150" y="265" fill="white" stroke="white" stroke-width="0" text-anchor="middle" fill-opacity="0.65">-R/2</text>
+            <text class="-rDiv2" x="225" y="335" fill="white" stroke="white" stroke-width="0" text-anchor="end" fill-opacity="0.65">-R/2</text>
+
+            <text class="r" x="420" y="265" fill="white" stroke="white" stroke-width="0" text-anchor="middle" fill-opacity="0.65">R</text>
+            <text class="r" x="225" y="65" fill="white" stroke="white" stroke-width="0" text-anchor="end" fill-opacity="0.65">R</text>
+
+            <text class="-r" x="60" y="265" fill="white" stroke="white" stroke-width="0" text-anchor="middle" fill-opacity="0.65">-R</text>
+            <text class="-r" x="225" y="425" fill="white" stroke="white" stroke-width="0" text-anchor="end" fill-opacity="0.65">-R</text>
+
+            <text x="220" y="265" fill="white" stroke="white" stroke-width="0" fill-opacity="0.65">0</text>
+            <g id="points-holder"/>
+
+        </svg>
+        </div>
+    </div>
+
+    <div id="table-container">
+        <h3>All submits</h3>
+        <p:dataTable id="result-table" styleClass="table" lazy="false">
+            <p:column headerText="X"/>
+            <p:column headerText="Y"/>
+            <p:column headerText="R"/>
+            <p:column headerText="Result"/>
+            <p:column headerText="Current time"/>
+            <p:column headerText="Execution time"/>
+        </p:dataTable>
+    </div>
+</h:body>
+</html>

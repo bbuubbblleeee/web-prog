@@ -1,0 +1,52 @@
+@import "variables";
+
+%table-base
+{
+  background-color: $element-background-color;
+  color: $header-text-color;
+  border: 0;
+}
+
+#result-table {
+  .ui-datatable-tablewrapper {
+    //border-radius: 0 0 12px 12px;
+    table {
+      thead {
+        th {
+          @extend %table-base;
+          color: $back-text-color;
+        }
+
+        tr {
+          border-bottom: solid 2px #374151;
+        }
+      }
+
+      tbody {
+        tr {
+          border-bottom: solid 2px #1e2836;
+
+          td {
+            @extend %table-base;
+            color: $header-text-color;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+body .ui-datatable .ui-datatable-data tr {
+  background: $element-background-color;
+}
+
+#table-container {
+  padding: 10px 20px 20px 20px;
+  background-color: $element-background-color;
+  border-radius: 12px;
+  h3 {
+    font-size: 20px;
+  }
+}
+

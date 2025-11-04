@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <h:outputStylesheet library="css" name="start/startPage.css"/>
+</h:head>
+<h:body>
+    <header>
+<!--        <p id="app-name">PointMatcher</p>-->
+        <div id="author-info">
+            <p id="name">Makhneva Irina Alexandrovna</p>
+            <p id="group">P3217</p>
+            <p id="variant">Variant: 3299</p>
+        </div>
+    </header>
+
+
+    <div id="time-and-link">
+        <div id="clock">
+            <div class="clock-part">
+                <span class="clock" id="hours">00</span>
+                <span class="clock-label">Hours</span>
+            </div>
+            <div class="clock-part">
+                <span class="clock" id="minutes">00</span>
+                <span class="clock-label">Minutes</span>
+            </div>
+            <div class="clock-part">
+                <span class="clock" id="seconds">00</span>
+                <span class="clock-label">Seconds</span>
+            </div>
+        </div>
+
+        <p:link id="main-page-link" value="Go to the main page" href="main" styleClass="ui-button"/>
+<!--        <p:link id="main-page-link" value="Go to the main page" href="/mainPage.xhtml" styleClass="ui-button"/>-->
+    </div>
+    <h:outputScript library="js" name="clock.js"/>
+</h:body>
+</html>

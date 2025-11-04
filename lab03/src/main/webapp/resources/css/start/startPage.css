@@ -1,0 +1,83 @@
+body {
+  background-color: #101922;
+  font-family: "Inter", sans-serif;
+  color: #cfd1d2;
+  height: calc(100vh - 30px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+#time-and-link {
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+#main-page-link {
+  color: #ffffff;
+  background-color: #8b5cf6;
+  border: solid #8b5cf6;
+  padding: 0.5rem 3rem;
+}
+
+header {
+  height: auto;
+  border-bottom: solid #283039 1px;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: right;
+  gap: 2rem;
+  padding-right: 2rem;
+}
+
+#author-info {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  gap: 2rem;
+}
+
+header p {
+  margin: 0;
+  padding-top: 16px;
+  padding-bottom: 8px;
+  font-size: 1.25rem;
+}
+
+.clock {
+  padding: 1rem 3rem;
+  background-color: #1a242f;
+  font-family: "Inter", "Roboto", sans-serif;
+  font-size: 3rem;
+  font-weight: 500;
+  border-radius: 0.75rem;
+  color: #ffffff;
+}
+
+#clock {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+
+.clock-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.clock-label {
+  color: #969a9d;
+}
+
+/*# sourceMappingURL=startPage.css.map */
