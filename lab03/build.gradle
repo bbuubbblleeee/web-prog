@@ -33,6 +33,7 @@ dependencies {
     compileOnly('jakarta.json.bind:jakarta.json.bind-api:3.0.0')
     compileOnly 'org.projectlombok:lombok:1.18.42'
     annotationProcessor 'org.projectlombok:lombok:1.18.42'
+    implementation('ch.qos.logback:logback-classic:1.5.19')
     implementation('org.primefaces:primefaces:13.0.0:jakarta')
     implementation('org.webjars:font-awesome:5.12.0')
     implementation("org.ocpsoft.rewrite:rewrite-integration-faces:10.0.2.Final")

@@ -1,7 +1,6 @@
 package app.lab03.data;
 
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import lombok.Getter;
 import lombok.Setter;

@@ -87,7 +87,7 @@ body #time-and-link #main-page-link {
   background-color: #8b5cf6;
 }
 body #time-and-link #main-page-link.ui-state-focus {
-  box-shadow: 0 0 6px #8b5cf6;
+  box-shadow: 0 0 12px #8b5cf6;
 }
 body #time-and-link #main-page-link a {
   text-decoration: none;

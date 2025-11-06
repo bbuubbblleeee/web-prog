@@ -5,7 +5,7 @@ body #time-and-link #main-page-link {
   padding: 6px 14px 6px 14px;
   background-color: $accent-color;
   &.ui-state-focus{
-    box-shadow: 0 0 6px $accent-color;
+    box-shadow: 0 0 12px $accent-color;
   }
 
   a {
