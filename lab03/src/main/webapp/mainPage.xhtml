@@ -16,6 +16,8 @@
         <p:linkButton id="link-back" href="/app" value="Back to Start Page" icon="fas fa-arrow-left"/>
 <!--        <p:linkButton id="link-back" href="/app" value="Back to Start Page" icon="fas fa-arrow-left"/>-->
     </header>
+<!--    <p:messages id="all-messages" widgetVar="messages"/>-->
+    <p:growl id="all-messages" widgetVar="messages"/>
     <div id="form-and-graph">
         <h:form id="input-form">
             <h3 id="form-label">Enter coordinates</h3>
@@ -23,7 +25,7 @@
                 <span>X coordinate</span>
                 <div id="x-values">
                     <ui:repeat value="#{validationService.x}" var="xVal">
-                        <p:commandLink update=":target-panel">
+                        <p:commandLink id="x" update=":target-panel">
                             <h:outputText value="#{xVal}">
                                 <f:convertNumber pattern="#.##" locale="en_US"/>
                             </h:outputText>
@@ -35,16 +37,17 @@
 
             <div id="y-input" class="form-element">
                 <p:outputLabel for="y">Y coordinate</p:outputLabel>
-                <p:inputNumber id="y" value="#{point.y}" minValue="-5" maxValue="5"/>
-<!--                <p:message for="y" style="color:red"/>-->
+                <p:inputText id="y" value="#{point.y}" type="number" placeholder="Enter a number in [-5; 5]" required="true" requiredMessage="Y must be entered" validatorMessage="Y coordinate must be in [-5; 5]">
+                    <f:validateDoubleRange minimum="-5" maximum="5"/>
+                </p:inputText>
             </div>
 
             <div id="r-select" class="form-element">
                 <p:outputLabel for="r">R radius</p:outputLabel>
-                <p:selectOneMenu id="r" value="#{point.r}" styleClass="custom-select">
+                <p:selectOneMenu id="r" value="#{point.r}" styleClass="custom-select" required="true" requiredMessage="R must be chosen.">
                     <f:selectItem id="select-r-option" itemLabel="Select radius" itemValue="#{null}" noSelectionOption="#{true}" />
                     <f:selectItems value="#{validationService.r}"/>
-                    <f:ajax event="change" process="@this" render="@this :target-panel"/>
+                    <p:ajax event="change" execute="@this" update="@this :target-panel" oncomplete="restoreGraph(#{history.getAllRequestsAsJson()})"/>
                 </p:selectOneMenu>
             </div>
 
@@ -52,7 +55,8 @@
             <p:remoteCommand name="executeCalculation"
                              actionListener="#{requestHandler.addPoint}"
                              process="@form"
-                             update=":result-table :target-panel :input-form:r"/>
+                             update=":result-table :target-panel :input-form:r all-messages"
+                             oncomplete="drawPoint(args.point)"/>
             <p:remoteCommand name="addPointFromGraph"
                              process="@form"
                              action="#{requestHandler.addPointFromGraph}"
@@ -61,7 +65,7 @@
 
         </h:form>
         <p:outputPanel id="target-panel" layout="block">
-            <h:outputText value="X value: #{point.r}"/>
+            <h:outputText value="X value: #{point.x}"/>
         </p:outputPanel>
 
 
@@ -178,4 +182,7 @@
     </div>
 </h:body>
     <h:outputScript library="js" name="graph.js"/>
+    <h:outputScript>
+        restoreGraph(#{history.getAllRequestsAsJson()})
+    </h:outputScript>
 </html>

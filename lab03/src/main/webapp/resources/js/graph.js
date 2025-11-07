@@ -5,7 +5,6 @@ function createPoint(xPixels, yPixels, result){
     circle.setAttribute("cy", yPixels.toString())
     circle.setAttribute("stroke-width", "1")
     circle.setAttribute("fill", result ? "#00f71a" : "#f50c0b")
-    console.log(circle.getAttribute("fill"))
     return circle
 }
 
@@ -18,50 +17,69 @@ const rPixels = 180;
 svg.addEventListener("click", event => {
     const rSelect = document.querySelector("option[selected='selected']")
     if (rSelect == null || rSelect.value === "") {
-        //TODO ошибку выкинуть
+        PF("messages").show([{
+            summary: "R is null",
+            detail: "R must be chosen",
+            severity: "error"
+        }]);
         event.preventDefault()
         return
     }
-    // if (!inputValidation(inputR.value, 2, 5, "R")){
-    //     event.preventDefault()
-    //     return
-    // }
-
     const rect = svg.getBoundingClientRect()
     const xPixels = event.clientX - rect.left
     const yPixels = event.clientY - rect.top
-    console.log(xPixels)
-    console.log(yPixels)
-    // graph.appendChild(drawPoint(xPixels, yPixels))
     const r = rSelect.value
     const x = (xPixels - centerX) * r / rPixels
     const y = (centerY - yPixels) * r / rPixels
-    console.log(x)
-    console.log(y)
 
     // executeCalculation()
-    console.log(addPointFromGraph([
+    addPointFromGraph([
         {name: 'x',  value: x},
         {name: 'y',  value: y}
-    ]));
-    console.log(":)")
-
-
-
-    // if (!response.ok){
-    //     showError(response.status)
-    // }
-    // const responseText = await response.json()
-    // points_holder.appendChild(drawPoint(xPixels, yPixels, responseText.result)
-    // console.log(x)
-    // console.log(y)
-    // console.log("---")
+    ]);
 })
 
 function drawPoint(point){
     const xPiexels = +point.x * rPixels / +point.r + centerX
     const yPiexels = - +point.y * rPixels / +point.r + centerY
-    console.log(point.result)
     graph.appendChild(createPoint(xPiexels, yPiexels, point.result))
 }
+
+
+function restorePoints(history){
+    console.log(history)
+    graph.innerHTML = ""
+    const rSelect = document.querySelector("option[selected='selected']")
+    rValue = +rSelect.value
+    history.forEach(point => {
+        if (point.r === rValue){
+            drawPoint(point)
+        }
+    });
+}
+
+function redrawGraph(){
+    const rSelect = document.querySelector("option[selected='selected']")
+    if (rSelect === null){
+        return;
+    }
+    rValue = +rSelect.value
+    const halfR = document.querySelectorAll(".rDiv2")
+    halfR.forEach(r => r.textContent = (rValue/2).toString())
+
+    const minusHalfR = document.querySelectorAll(".-rDiv2")
+    minusHalfR.forEach(r => r.textContent = (-rValue/2).toString())
+
+    const r = document.querySelectorAll(".r")
+    r.forEach(r => r.textContent = rValue.toString())
+
+    const minusR = document.querySelectorAll(".-r")
+    minusR.forEach(r => r.textContent = (-rValue).toString())
+}
+
+function restoreGraph(history){
+    redrawGraph();
+    restorePoints(history);
+}
+
 

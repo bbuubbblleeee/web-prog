@@ -14,9 +14,9 @@ import java.time.LocalDateTime;
 @SessionScoped
 public class Point implements Serializable {
     private float x;
-    private float y;
+    private Float y;
     private int r;
     private boolean result;
-    private LocalDateTime currentTime;
+    private String currentTime;
     private long executionTime;
 }

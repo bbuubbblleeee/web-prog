@@ -3,6 +3,8 @@ package app.lab03.process;
 import app.lab03.data.History;
 import app.lab03.data.Point;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.FacesException;
+import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -11,6 +13,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Map;
 
 @Named
@@ -34,7 +40,12 @@ public class RequestHandler implements Serializable {
             newPoint.setY(point.getY());
             newPoint.setR(point.getR());
             newPoint.setResult(new MathematicalCalculations().ifHits(point.getX(), point.getY(), point.getR()));
-            newPoint.setCurrentTime(LocalDateTime.now());
+
+            ZonedDateTime moscowTime = ZonedDateTime.now(ZoneId.of("Europe/Moscow"));
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss", Locale.forLanguageTag("ru"));
+            String currentTime = dateTimeFormatter.format(moscowTime);
+
+            newPoint.setCurrentTime(currentTime);
             newPoint.setExecutionTime(System.nanoTime() - startTime);
             history.add(newPoint);
 
@@ -48,7 +59,7 @@ public class RequestHandler implements Serializable {
     public void addPointFromGraph(){
         try {
             System.out.println("graph called!!");
-
+            //TODO добавить валидацию x и y
             Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
             point.setX(Float.parseFloat(params.get("x")));
             point.setY(Float.parseFloat(params.get("y")));

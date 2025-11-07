@@ -70,16 +70,16 @@ body {
   margin: 5px 0;
   color: #ffffff;
 }
-#input-form #y-input #input-form\:y_input {
+#input-form #y-input #input-form\:y {
   background-color: #283039;
   border: 0;
   color: #bcc5cf;
   width: 100%;
 }
-#input-form #y-input #input-form\:y_input.ui-inputfield {
+#input-form #y-input #input-form\:y.ui-inputfield {
   border-radius: 0.4rem;
 }
-#input-form #y-input #input-form\:y_input.ui-state-focus {
+#input-form #y-input #input-form\:y.ui-state-focus {
   box-shadow: 0 0 5px 0.1em #8b5cf6;
 }
 

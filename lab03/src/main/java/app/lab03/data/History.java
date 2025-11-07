@@ -1,5 +1,6 @@
 package app.lab03.data;
 
+import com.google.gson.Gson;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import lombok.Getter;
@@ -16,5 +17,10 @@ public class History implements Serializable {
 
     public void add(Point point){
         allRequests.add(0, point);
+    }
+
+    public String getAllRequestsAsJson(){
+        Gson gson = new Gson();
+        return gson.toJson(allRequests);
     }
 }
