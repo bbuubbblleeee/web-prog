@@ -1,7 +1,11 @@
 header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin: 15px 0 20px 0;
+}
+header h2 {
+  margin: 0 0 0 1.5rem;
+  align-content: center;
 }
 
 header #link-back.ui-linkbutton {

@@ -37,6 +37,13 @@ header {
   gap: 2rem;
   padding-right: 2rem;
 }
+header h2 {
+  margin: 0 0 0 1.5rem;
+  align-content: center;
+  padding-top: 16px;
+  padding-bottom: 2px;
+  font-size: 1.5rem;
+}
 
 #author-info {
   width: 100%;
@@ -53,6 +60,11 @@ header p {
   font-size: 1.25rem;
 }
 
+@media (max-width: 890px) {
+  h2 {
+    display: none;
+  }
+}
 .clock {
   padding: 1rem 3rem;
   background-color: #1a242f;

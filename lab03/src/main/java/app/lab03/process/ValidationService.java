@@ -23,7 +23,7 @@ public class ValidationService implements Serializable {
     private final List<Float> x = List.of(-2F,-1.5F, -1F, -0.5F, 0F, 0.5F, 1F, 1.5F);
     private final List<Integer> r = List.of(1, 2, 3, 4, 5);
 
-    public Float validate(String x) {
+    public Float validateFloat(String x, String component) {
         try{
             if (x == null){
                 throw new NumberFormatException();
@@ -31,7 +31,20 @@ public class ValidationService implements Serializable {
             return Float.parseFloat(x);
         }
         catch (NumberFormatException e){
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "X is invalid", "X coordinate must be a number");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, component + " is invalid", component + " coordinate must be a number");
+            throw new FacesException(message.toString());
+        }
+    }
+
+    public int validateInt(String x) {
+        try{
+            if (x == null){
+                throw new NumberFormatException();
+            }
+            return Integer.parseInt(x);
+        }
+        catch (NumberFormatException e){
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "R is invalid", "R coordinate must be a number");
             throw new FacesException(message.toString());
         }
     }

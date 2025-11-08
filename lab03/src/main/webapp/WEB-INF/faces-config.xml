@@ -3,4 +3,8 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
                                   https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd">
+    <converter>
+        <converter-for-class>java.lang.Float</converter-for-class>
+        <converter-class>app.lab03.converters.YConverter</converter-class>
+    </converter>
 </faces-config>

@@ -32,15 +32,14 @@ svg.addEventListener("click", event => {
     const x = (xPixels - centerX) * r / rPixels
     const y = (centerY - yPixels) * r / rPixels
 
-    // executeCalculation()
     addPointFromGraph([
         {name: 'x',  value: x},
-        {name: 'y',  value: y}
+        {name: 'y',  value: y},
+        {name: 'r', value: r}
     ]);
 })
 
 function drawPoint(point){
-    console.log(point)
     if (point === undefined){
         return
     }
@@ -51,7 +50,6 @@ function drawPoint(point){
 
 
 function restorePoints(history){
-    console.log(history)
     graph.innerHTML = ""
     const rSelect = document.querySelector("option[selected='selected']")
     if (rSelect === null){

@@ -13,6 +13,7 @@
     </h:head>
 <h:body>
     <header>
+        <h2>WebLab3</h2>
         <p:linkButton id="link-back" href="/app" value="Back to Start Page" icon="fas fa-arrow-left"/>
 <!--        <p:linkButton id="link-back" href="/app" value="Back to Start Page" icon="fas fa-arrow-left"/>-->
     </header>
@@ -25,7 +26,7 @@
                 <span>X coordinate</span>
                 <div id="x-values">
                     <ui:repeat value="#{validationService.x}" var="xVal">
-                        <p:commandLink id="x" update=":target-panel" process="@this" onclick="restoreXClass('#{xVal}');">
+                        <p:commandLink id="x" process="@this" update=":target-panel" onclick="restoreX('#{xVal}');">
                             <h:outputText value="#{xVal}">
                                 <f:convertNumber pattern="#.##" locale="en_US"/>
                             </h:outputText>
@@ -37,9 +38,11 @@
 
             <div id="y-input" class="form-element">
                 <p:outputLabel for="y">Y coordinate</p:outputLabel>
-                <p:inputText id="y" value="#{point.y}" type="number" placeholder="Enter a number in [-5; 5]" requiredMessage="Y must be entered" validatorMessage="Y coordinate must be a number in [-5; 5]">
+                <p:inputText id="y" value="#{point.y}" type="number"
+                             placeholder="Enter a number in [-5; 5]"
+                             validatorMessage="Y coordinate must be a number in [-5; 5]">
                     <f:validateDoubleRange minimum="-5" maximum="5"/>
-                    <f:convertNumber pattern="#.#####" locale="en_US"/>
+<!--                    <f:convertNumber pattern="#.#####" locale="en_US"/>-->
                 </p:inputText>
             </div>
 
@@ -48,7 +51,7 @@
                 <p:selectOneMenu id="r" value="#{point.r}" styleClass="custom-select" required="true" requiredMessage="R must be chosen.">
                     <f:selectItem id="select-r-option" itemLabel="Select radius" itemValue="#{null}" noSelectionOption="#{true}" />
                     <f:selectItems value="#{validationService.r}"/>
-                    <p:ajax event="change" execute="@this" update="@this :target-panel" oncomplete="restoreGraph(#{history.getAllRequestsAsJson()})"/>
+                    <p:ajax event="change" execute="@this" update="@this" oncomplete="restoreGraph(#{history.getAllRequestsAsJson()})"/>
                 </p:selectOneMenu>
             </div>
 
@@ -58,14 +61,13 @@
             <p:remoteCommand name="executeCalculation"
                              actionListener="#{requestHandler.addPoint(point)}"
                              process="@form"
-                             update="@form :result-table :target-panel :input-form:r all-messages"
-                             oncomplete="if(!args.validationFailed) {drawPoint(args.point)}"/>
+                             update="y r :result-table :input-form:r all-messages"
+                             oncomplete="if(!args.validationFailed) {drawPoint(args.point)};"/>
             <p:remoteCommand name="addPointFromGraph"
-                             process="@form"
-                             action="#{requestHandler.addPointFromGraph(point)}"
-                                update=":result-table y :target-panel"
-                                resetValues="true"
-                                oncomplete="drawPoint(args.point)"/>
+                             process="@this r"
+                             action="#{requestHandler.addPointFromGraph}"
+                             update=":result-table"
+                             oncomplete="drawPoint(args.point)"/>
 
         </h:form>
         <p:outputPanel id="target-panel" layout="block">
@@ -195,7 +197,6 @@
     </h:outputScript>
     <h:outputScript library="js" name="x.js"/>
     <h:outputScript>
-        restoreXClass(#{point.x});
-
+        restoreX(#{point.x});
     </h:outputScript>
 </html>

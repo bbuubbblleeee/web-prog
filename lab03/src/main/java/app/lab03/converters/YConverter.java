@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 
-@FacesConverter("yConverter")
 public class YConverter implements Converter<Float> {
     private Logger logger = LoggerFactory.getLogger(YConverter.class);
     @Override
@@ -19,6 +18,7 @@ public class YConverter implements Converter<Float> {
         logger.info("YConverter called");
         try{
             if (value == null){
+
                 throw new NumberFormatException();
             }
             return Float.parseFloat(value.replace(',', '.'));

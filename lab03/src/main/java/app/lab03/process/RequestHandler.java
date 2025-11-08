@@ -48,6 +48,7 @@ public class RequestHandler implements Serializable {
             newPoint.setCurrentTime(currentTime);
             newPoint.setExecutionTime(System.nanoTime() - startTime);
             history.add(newPoint);
+            System.out.println(point.getX());
 
             PrimeFaces.current().ajax().addCallbackParam("point", newPoint);
         }
@@ -56,14 +57,14 @@ public class RequestHandler implements Serializable {
         }
     }
 
-    public void addPointFromGraph(Point point){
+    public void addPointFromGraph(){
         try {
             System.out.println("graph called!!");
             Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
             Point newPoint = new Point();
-            newPoint.setX(validationService.validate(params.get("x")));
-            newPoint.setY(validationService.validate(params.get("y")));
-            newPoint.setR(point.getR());
+            newPoint.setX(validationService.validateFloat(params.get("x"), "X"));
+            newPoint.setY(validationService.validateFloat(params.get("y"), "Y"));
+            newPoint.setR(validationService.validateInt(params.get("r")));
             addPoint(newPoint);
         }
         catch (Exception e){

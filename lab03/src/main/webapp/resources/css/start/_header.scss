@@ -11,6 +11,13 @@ header {
   justify-content: right;
   gap: 2rem;
   padding-right: 2rem;
+  h2 {
+    margin: 0 0 0 1.5rem;
+    align-content: center;
+    padding-top: 16px;
+    padding-bottom: 2px;
+    font-size: 1.5rem;
+  }
 }
 
 #author-info {
@@ -30,6 +37,11 @@ header p{
   //text-align: center;
 }
 
+@media(max-width: 890px){
+  h2 {
+    display: none;
+  }
+}
 //#app-name{
 //  display: inline-block;
 //  padding-left: 2rem;
