@@ -43,8 +43,9 @@ body {
 #form-and-graph {
   display: flex;
   flex-direction: row;
-  gap: 3%;
+  gap: 25px 3%;
   margin-bottom: 25px;
+  flex-wrap: wrap;
 }
 
 #input-form\:form-label {
@@ -98,6 +99,11 @@ body {
   color: #bcc5cf;
 }
 #x-values a:hover {
+  background-color: #8b5cf6;
+  color: #e3e4e6;
+  box-shadow: 0 0 10px #8b5cf6;
+}
+#x-values a.last {
   background-color: #8b5cf6;
   color: #e3e4e6;
   box-shadow: 0 0 10px #8b5cf6;
@@ -181,6 +187,12 @@ body {
   gap: 0.4rem;
 }
 
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 svg {
   display: block;
   background-color: #283039;
@@ -227,6 +239,12 @@ body .ui-datatable .ui-datatable-data tr {
 }
 #table-container h3 {
   font-size: 20px;
+}
+
+.ui-growl {
+  position: fixed;
+  top: 0;
+  right: 0;
 }
 
 /*# sourceMappingURL=mainPage.css.map */

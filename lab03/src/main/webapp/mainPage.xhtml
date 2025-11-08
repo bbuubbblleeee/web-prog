@@ -25,7 +25,7 @@
                 <span>X coordinate</span>
                 <div id="x-values">
                     <ui:repeat value="#{validationService.x}" var="xVal">
-                        <p:commandLink id="x" update=":target-panel" process="@this">
+                        <p:commandLink id="x" update=":target-panel" process="@this" onclick="restoreXClass('#{xVal}');">
                             <h:outputText value="#{xVal}">
                                 <f:convertNumber pattern="#.##" locale="en_US"/>
                             </h:outputText>
@@ -56,13 +56,13 @@
                              onclick="executeCalculation(); return false;"
                              />
             <p:remoteCommand name="executeCalculation"
-                             actionListener="#{requestHandler.addPoint}"
+                             actionListener="#{requestHandler.addPoint(point)}"
                              process="@form"
                              update="@form :result-table :target-panel :input-form:r all-messages"
                              oncomplete="if(!args.validationFailed) {drawPoint(args.point)}"/>
             <p:remoteCommand name="addPointFromGraph"
                              process="@form"
-                             action="#{requestHandler.addPointFromGraph}"
+                             action="#{requestHandler.addPointFromGraph(point)}"
                                 update=":result-table y :target-panel"
                                 resetValues="true"
                                 oncomplete="drawPoint(args.point)"/>
@@ -192,5 +192,10 @@
     <h:outputScript library="js" name="graph.js"/>
     <h:outputScript>
         restoreGraph(#{history.getAllRequestsAsJson()})
+    </h:outputScript>
+    <h:outputScript library="js" name="x.js"/>
+    <h:outputScript>
+        restoreXClass(#{point.x});
+
     </h:outputScript>
 </html>

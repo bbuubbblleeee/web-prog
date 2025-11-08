@@ -26,11 +26,11 @@ public class RequestHandler implements Serializable {
 
     @Inject
     private History history;
-
+    @Named
     @Inject
-    private Point point;
+    private ValidationService validationService;
 
-    public void addPoint(){
+    public void addPoint(Point point){
         try {
             logger.info("addPoint called!!");
 
@@ -56,20 +56,19 @@ public class RequestHandler implements Serializable {
         }
     }
 
-    public void addPointFromGraph(){
+    public void addPointFromGraph(Point point){
         try {
             System.out.println("graph called!!");
-            //TODO добавить валидацию x и y
             Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-            point.setX(Float.parseFloat(params.get("x")));
-            point.setY(Float.parseFloat(params.get("y")));
-            System.out.println(params.get("x"));
-            System.out.println(params.get("y"));
-
-            addPoint();
+            Point newPoint = new Point();
+            newPoint.setX(validationService.validate(params.get("x")));
+            newPoint.setY(validationService.validate(params.get("y")));
+            newPoint.setR(point.getR());
+            addPoint(newPoint);
         }
         catch (Exception e){
             logger.error(e.getMessage());
+            throw new FacesException(e.getMessage());
         }
     }
 }
