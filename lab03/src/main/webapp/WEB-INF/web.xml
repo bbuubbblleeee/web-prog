@@ -7,6 +7,10 @@
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
     <session-config>
-        <session-timeout>30</session-timeout>
+        <session-timeout>1</session-timeout>
     </session-config>
+    <error-page>
+        <exception-type>jakarta.faces.application.ViewExpiredException</exception-type>
+        <location>/</location>
+    </error-page>
 </web-app>

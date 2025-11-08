@@ -17,7 +17,7 @@
 <!--        <p:linkButton id="link-back" href="/app" value="Back to Start Page" icon="fas fa-arrow-left"/>-->
     </header>
 <!--    <p:messages id="all-messages" widgetVar="messages"/>-->
-    <p:growl id="all-messages" widgetVar="messages"/>
+    <p:growl id="all-messages" widgetVar="messages" />
     <div id="form-and-graph">
         <h:form id="input-form">
             <h3 id="form-label">Enter coordinates</h3>
@@ -25,11 +25,11 @@
                 <span>X coordinate</span>
                 <div id="x-values">
                     <ui:repeat value="#{validationService.x}" var="xVal">
-                        <p:commandLink id="x" update=":target-panel">
+                        <p:commandLink id="x" update=":target-panel" process="@this">
                             <h:outputText value="#{xVal}">
                                 <f:convertNumber pattern="#.##" locale="en_US"/>
                             </h:outputText>
-                            <f:setPropertyActionListener target="#{point.x}" value="#{xVal}"/>
+                            <f:setPropertyActionListener target="#{point.x}" render="@this" value="#{xVal}"/>
                         </p:commandLink>
                     </ui:repeat>
                 </div>
@@ -37,8 +37,9 @@
 
             <div id="y-input" class="form-element">
                 <p:outputLabel for="y">Y coordinate</p:outputLabel>
-                <p:inputText id="y" value="#{point.y}" type="number" placeholder="Enter a number in [-5; 5]" required="true" requiredMessage="Y must be entered" validatorMessage="Y coordinate must be in [-5; 5]">
+                <p:inputText id="y" value="#{point.y}" type="number" placeholder="Enter a number in [-5; 5]" requiredMessage="Y must be entered" validatorMessage="Y coordinate must be a number in [-5; 5]">
                     <f:validateDoubleRange minimum="-5" maximum="5"/>
+                    <f:convertNumber pattern="#.#####" locale="en_US"/>
                 </p:inputText>
             </div>
 
@@ -51,16 +52,19 @@
                 </p:selectOneMenu>
             </div>
 
-            <p:commandButton id="submit-button" value="Check Point" icon="far fa-check-circle" onclick="executeCalculation(); return false;"/>
+            <p:commandButton id="submit-button" value="Check Point" icon="far fa-check-circle"
+                             onclick="executeCalculation(); return false;"
+                             />
             <p:remoteCommand name="executeCalculation"
                              actionListener="#{requestHandler.addPoint}"
                              process="@form"
-                             update=":result-table :target-panel :input-form:r all-messages"
-                             oncomplete="drawPoint(args.point)"/>
+                             update="@form :result-table :target-panel :input-form:r all-messages"
+                             oncomplete="if(!args.validationFailed) {drawPoint(args.point)}"/>
             <p:remoteCommand name="addPointFromGraph"
                              process="@form"
                              action="#{requestHandler.addPointFromGraph}"
-                                update=":result-table"
+                                update=":result-table y :target-panel"
+                                resetValues="true"
                                 oncomplete="drawPoint(args.point)"/>
 
         </h:form>
@@ -161,12 +165,16 @@
         <h3>All submits</h3>
         <p:dataTable id="result-table" styleClass="table" lazy="false" value="#{history.allRequests}" var="myPoint">
             <p:column headerText="X">
-                <h:outputText value="#{myPoint.x}"/>
+                <h:outputText value="#{myPoint.x}">
+                    <f:convertNumber pattern="#.#####" locale="en_US"/>
+                </h:outputText>
             </p:column>
             <p:column headerText="Y">
-                <h:outputText value="#{myPoint.y}"/>
+                <h:outputText value="#{myPoint.y}">
+                    <f:convertNumber pattern="#.#####" locale="en_US"/>
+                </h:outputText>
             </p:column>
-            <p:column headerText="R">
+            <p:column headerText="R" >
                 <h:outputText value="#{myPoint.r}"/>
             </p:column>
             <p:column headerText="Result">

@@ -40,6 +40,10 @@ svg.addEventListener("click", event => {
 })
 
 function drawPoint(point){
+    console.log(point)
+    if (point === undefined){
+        return
+    }
     const xPiexels = +point.x * rPixels / +point.r + centerX
     const yPiexels = - +point.y * rPixels / +point.r + centerY
     graph.appendChild(createPoint(xPiexels, yPiexels, point.result))
@@ -50,6 +54,9 @@ function restorePoints(history){
     console.log(history)
     graph.innerHTML = ""
     const rSelect = document.querySelector("option[selected='selected']")
+    if (rSelect === null){
+        return;
+    }
     rValue = +rSelect.value
     history.forEach(point => {
         if (point.r === rValue){

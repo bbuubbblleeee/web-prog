@@ -22,6 +22,10 @@ public class ValidationService implements Serializable {
     private final List<Float> x = List.of(-2F,-1.5F, -1F, -0.5F, 0F, 0.5F, 1F, 1.5F);
     private final List<Integer> r = List.of(1, 2, 3, 4, 5);
 
+    public void validateX() {
+
+    }
+
 //    public void validateR(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 //        FacesMessage msg;
 //        System.out.println("--- МЕТОД VALIDATE R ВЫЗВАН ---"); // <-- ДОБАВИТЬ ЭТУ СТРОКУ

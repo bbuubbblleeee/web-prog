@@ -28,6 +28,7 @@
 
           td {
             @extend %table-base;
+
             color: $header-text-color;
           }
         }

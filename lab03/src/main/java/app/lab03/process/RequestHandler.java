@@ -63,6 +63,9 @@ public class RequestHandler implements Serializable {
             Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
             point.setX(Float.parseFloat(params.get("x")));
             point.setY(Float.parseFloat(params.get("y")));
+            System.out.println(params.get("x"));
+            System.out.println(params.get("y"));
+
             addPoint();
         }
         catch (Exception e){
