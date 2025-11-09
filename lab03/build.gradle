@@ -41,6 +41,12 @@ dependencies {
     implementation("org.ocpsoft.rewrite:rewrite-servlet:10.0.2.Final")
     implementation("org.ocpsoft.rewrite:rewrite-config-prettyfaces:10.0.2.Final")
 
+    // https://mvnrepository.com/artifact/org.postgresql/postgresql
+//    implementation 'org.postgresql:postgresql:42.7.8'
+
+    // https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core
+    compileOnly 'org.hibernate:hibernate-core:6.2.6.Final'
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }

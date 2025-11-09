@@ -4,12 +4,14 @@ import com.google.gson.Gson;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 @Getter
+@Setter
 @Named
 @SessionScoped
 public class History implements Serializable {

@@ -26,7 +26,7 @@
                 <span>X coordinate</span>
                 <div id="x-values">
                     <ui:repeat value="#{validationService.x}" var="xVal">
-                        <p:commandLink id="x" process="@this" update=":target-panel" onclick="restoreX('#{xVal}');">
+                        <p:commandLink id="x" process="@this"  onclick="restoreX('#{xVal}');">
                             <h:outputText value="#{xVal}">
                                 <f:convertNumber pattern="#.##" locale="en_US"/>
                             </h:outputText>
@@ -70,9 +70,9 @@
                              oncomplete="drawPoint(args.point)"/>
 
         </h:form>
-        <p:outputPanel id="target-panel" layout="block">
-            <h:outputText value="X value: #{point.x}"/>
-        </p:outputPanel>
+<!--        <p:outputPanel id="target-panel" layout="block">-->
+<!--            <h:outputText value="X value: #{point.x}"/>-->
+<!--        </p:outputPanel>-->
 
 
         <div id="graph-container">
@@ -198,5 +198,13 @@
     <h:outputScript library="js" name="x.js"/>
     <h:outputScript>
         restoreX(#{point.x});
+    </h:outputScript>
+    <h:outputScript library="js" name="table.js"/>
+    <p:remoteCommand name="restorePointsFromDb"
+                     action="#{pointDao.restorePointsFromDB}"
+                     update=":result-table"
+                    process="@this"/>
+    <h:outputScript>
+        restorePointsFromDb();
     </h:outputScript>
 </html>

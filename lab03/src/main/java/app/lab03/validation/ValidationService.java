@@ -1,15 +1,8 @@
-package app.lab03.process;
+package app.lab03.validation;
 
-import app.lab03.data.Point;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.FacesException;
 import jakarta.faces.application.FacesMessage;
-import jakarta.faces.component.UIComponent;
-import jakarta.faces.context.FacesContext;
-import jakarta.faces.validator.ValidatorException;
-import jakarta.faces.view.facelets.FaceletException;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Getter;
 

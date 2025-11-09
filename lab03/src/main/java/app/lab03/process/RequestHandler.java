@@ -1,28 +1,30 @@
 package app.lab03.process;
 
+import app.lab03.dao.PointDao;
 import app.lab03.data.History;
 import app.lab03.data.Point;
+import app.lab03.validation.ValidationService;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.FacesException;
-import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.extern.slf4j.Slf4j;
 import org.primefaces.PrimeFaces;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Map;
 
+@Slf4j
 @Named
 @SessionScoped
 public class RequestHandler implements Serializable {
-    private Logger logger = LoggerFactory.getLogger(RequestHandler.class);
+    @Inject
+    PointDao pointDao;
 
     @Inject
     private History history;
@@ -31,29 +33,29 @@ public class RequestHandler implements Serializable {
     private ValidationService validationService;
 
     public void addPoint(Point point){
-        try {
-            logger.info("addPoint called!!");
-
+        log.info("addPoint called!!");
+        try{
+            pointDao.restorePointsFromDB();
             long startTime = System.nanoTime();
+            ZonedDateTime moscowTime = ZonedDateTime.now(ZoneId.of("Europe/Moscow"));
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss", Locale.forLanguageTag("ru"));
+            String currentTime = dateTimeFormatter.format(moscowTime);
+
             Point newPoint = new Point();
             newPoint.setX(point.getX());
             newPoint.setY(point.getY());
             newPoint.setR(point.getR());
             newPoint.setResult(new MathematicalCalculations().ifHits(point.getX(), point.getY(), point.getR()));
-
-            ZonedDateTime moscowTime = ZonedDateTime.now(ZoneId.of("Europe/Moscow"));
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss", Locale.forLanguageTag("ru"));
-            String currentTime = dateTimeFormatter.format(moscowTime);
-
             newPoint.setCurrentTime(currentTime);
             newPoint.setExecutionTime(System.nanoTime() - startTime);
-            history.add(newPoint);
-            System.out.println(point.getX());
 
+            history.add(newPoint);
+
+            pointDao.addPointToDb(newPoint);
             PrimeFaces.current().ajax().addCallbackParam("point", newPoint);
         }
         catch (Exception e){
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
         }
     }
 
@@ -68,7 +70,7 @@ public class RequestHandler implements Serializable {
             addPoint(newPoint);
         }
         catch (Exception e){
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
             throw new FacesException(e.getMessage());
         }
     }
