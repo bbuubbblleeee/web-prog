@@ -51,13 +51,20 @@
                 <p:selectOneMenu id="r" value="#{point.r}" styleClass="custom-select" required="true" requiredMessage="R must be chosen.">
                     <f:selectItem id="select-r-option" itemLabel="Select radius" itemValue="#{null}" noSelectionOption="#{true}" />
                     <f:selectItems value="#{validationService.r}"/>
-                    <p:ajax event="change" execute="@this" update="@this" oncomplete="restoreGraph(#{history.getAllRequestsAsJson()})"/>
+                    <p:ajax event="change" execute="@this" update="@this" oncomplete="getAllRequestsAsJson()"/>
                 </p:selectOneMenu>
             </div>
 
-            <p:commandButton id="submit-button" value="Check Point" icon="far fa-check-circle"
-                             onclick="executeCalculation(); return false;"
-                             />
+            <div id="button-container">
+                <p:commandButton id="submit-button" value="Check Point" icon="far fa-check-circle"
+                                 onclick="executeCalculation(); return false;"
+                />
+                <p:commandButton id="clear-form-button" value="Clear form"
+                                 action="#{requestHandler.clearForm(point)}" process="@this"
+                                 update="y r" onclick="clearForm()"
+                                 icon="fa fa-rotate-right"/>
+
+            </div>
             <p:remoteCommand name="executeCalculation"
                              actionListener="#{requestHandler.addPoint(point)}"
                              process="@form"
@@ -164,8 +171,13 @@
     </div>
 
     <div id="table-container">
-        <h3>All submits</h3>
-        <p:dataTable id="result-table" styleClass="table" lazy="false" value="#{history.allRequests}" var="myPoint">
+        <div id="top-of-table">
+            <h3>All submits</h3>
+            <p:commandButton id="clear-table-button" value="Clear table" action="#{requestHandler.clearTable()}"
+                             update=":result-table" process="@this"
+                             oncomplete="restoreGraph(null)"/>
+        </div>
+        <p:dataTable id="result-table" styleClass="table" lazy="false" value="#{history.allRequests}" var="myPoint" emptyMessage="No data found">
             <p:column headerText="X">
                 <h:outputText value="#{myPoint.x}">
                     <f:convertNumber pattern="#.#####" locale="en_US"/>
@@ -192,19 +204,27 @@
     </div>
 </h:body>
     <h:outputScript library="js" name="graph.js"/>
-    <h:outputScript>
-        restoreGraph(#{history.getAllRequestsAsJson()})
-    </h:outputScript>
-    <h:outputScript library="js" name="x.js"/>
-    <h:outputScript>
-        restoreX(#{point.x});
-    </h:outputScript>
-    <h:outputScript library="js" name="table.js"/>
+    <h:outputScript library="js" name="form.js"/>
     <p:remoteCommand name="restorePointsFromDb"
                      action="#{pointDao.restorePointsFromDB}"
-                     update=":result-table"
-                    process="@this"/>
+                     update="@this :result-table"
+                     process="@this"
+                     oncomplete="getAllRequestsAsJson()"/>
+    <p:remoteCommand name="getAllRequestsAsJson"
+                     action="#{history.getAllRequestsAsJson()}"
+                     process="@this"
+                     oncomplete="restoreGraph(JSON.parse(args.pointsHistory))"/>
     <h:outputScript>
         restorePointsFromDb();
+        restoreX(#{point.x});
     </h:outputScript>
+
+    <h:outputScript>
+        $(document).on('pfAjaxError', function (event, xhr, settings) {
+            if (xhr.responseText &amp;&amp; xhr.responseText.includes("ViewExpiredException")) {
+            window.location.href = '/main';
+            }
+        });
+    </h:outputScript>
+
 </html>

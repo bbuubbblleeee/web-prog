@@ -5,6 +5,7 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+import org.primefaces.PrimeFaces;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -21,8 +22,8 @@ public class History implements Serializable {
         allRequests.add(0, point);
     }
 
-    public String getAllRequestsAsJson(){
+    public void getAllRequestsAsJson(){
         Gson gson = new Gson();
-        return gson.toJson(allRequests);
+        PrimeFaces.current().ajax().addCallbackParam("pointsHistory", gson.toJson(allRequests));
     }
 }

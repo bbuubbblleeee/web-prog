@@ -6,6 +6,7 @@ import app.lab03.data.Point;
 import app.lab03.validation.ValidationService;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.FacesException;
+import jakarta.faces.component.UIViewRoot;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -16,6 +17,7 @@ import java.io.Serializable;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
 
@@ -35,7 +37,6 @@ public class RequestHandler implements Serializable {
     public void addPoint(Point point){
         log.info("addPoint called!!");
         try{
-            pointDao.restorePointsFromDB();
             long startTime = System.nanoTime();
             ZonedDateTime moscowTime = ZonedDateTime.now(ZoneId.of("Europe/Moscow"));
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss", Locale.forLanguageTag("ru"));
@@ -73,5 +74,19 @@ public class RequestHandler implements Serializable {
             log.error(e.getMessage());
             throw new FacesException(e.getMessage());
         }
+    }
+
+    public void clearForm(Point point){
+        log.info("clearForm called");
+        point.setX(0F);
+        point.setY(null);
+        point.setR(0);
+    }
+
+    public void clearTable(){
+        log.info("clearTable called");
+        history.setAllRequests(new ArrayList<>());
+        pointDao.deletePoints();
+        log.info("data is deleted");
     }
 }

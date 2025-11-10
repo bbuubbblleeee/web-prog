@@ -3,6 +3,9 @@ package app.lab03.dao;
 import app.lab03.data.History;
 import app.lab03.data.Point;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.component.UIViewRoot;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.render.Renderer;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
@@ -10,6 +13,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Table;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
+import org.primefaces.PrimeFaces;
 
 
 import java.io.Serializable;
@@ -38,5 +42,10 @@ public class PointDao implements Serializable {
         List<Point> all = entityManager.createQuery("SELECT p FROM Point p", Point.class).getResultList();
         Collections.reverse(all);
         history.setAllRequests(all);
+    }
+
+    @Transactional
+    public void deletePoints(){
+        entityManager.createQuery("DELETE FROM Point").executeUpdate();
     }
 }

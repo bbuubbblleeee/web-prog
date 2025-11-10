@@ -157,14 +157,20 @@ body {
   color: #4e5055 !important;
 }
 
+#button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: 100%;
+}
+
 #input-form\:submit-button {
   background-color: #8b5cf6;
   border: #8b5cf6;
-  margin: 10px 0;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
+  flex-grow: 1.5;
   font-size: 17px;
 }
 #input-form\:submit-button .ui-button-text {
@@ -173,8 +179,10 @@ body {
 }
 #input-form\:submit-button span.ui-button-icon-left.ui-icon.ui-c.far.fa-check-circle {
   position: relative;
-  margin: 2px 0 0 0;
+  margin: 4px 0 0 0;
   color: #e3e4e6;
+  top: 0;
+  font-size: 18px;
 }
 #input-form\:submit-button span.ui-button-icon-left.ui-icon.ui-c.far.fa-check-circle.ui-state-focus {
   position: relative;
@@ -183,6 +191,35 @@ body {
 }
 #input-form\:submit-button.ui-state-focus {
   box-shadow: 0 0 10px #8b5cf6;
+}
+
+#input-form\:clear-form-button {
+  background-color: #4a426e;
+  border: #4a426e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 0.5;
+  font-size: 17px;
+}
+#input-form\:clear-form-button .ui-button-text {
+  padding-left: 15px;
+  color: #c4b5fd;
+}
+#input-form\:clear-form-button.ui-state-focus {
+  box-shadow: 0 0 10px #8b5cf6;
+}
+#input-form\:clear-form-button span.ui-button-icon-left.ui-icon.ui-c.fa.fa-rotate-right {
+  position: relative;
+  margin: 3px 0 0 0;
+  color: #c4b5fd;
+  top: 0;
+  font-size: 16px;
+}
+#input-form\:clear-form-button span.ui-button-icon-left.ui-icon.ui-c.fa.fa-rotate-right.ui-state-focus {
+  position: relative;
+  margin: 2px 0 0 0;
+  color: #c4b5fd;
 }
 
 .form-element {
@@ -243,6 +280,28 @@ body .ui-datatable .ui-datatable-data tr {
 }
 #table-container h3 {
   font-size: 20px;
+}
+
+#top-of-table {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#top-of-table #clear-table-button {
+  width: 15rem;
+  height: fit-content;
+  background-color: #4a426e;
+  border: #4a426e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
+}
+#top-of-table #clear-table-button .ui-button-text {
+  color: #c4b5fd;
+}
+#top-of-table #clear-table-button.ui-state-focus {
+  box-shadow: 0 0 10px #8b5cf6;
 }
 
 .ui-growl {

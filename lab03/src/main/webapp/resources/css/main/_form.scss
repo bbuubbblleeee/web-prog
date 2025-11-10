@@ -68,19 +68,6 @@
 }
 
 
-
-//#r-select {
-//  #input-form\:r {
-//    #input-form\:r_input {
-//      #input-form\:r_input > option:nth-child(2) {
-//        background-color: $input-background-color !important;
-//
-//      }
-//
-//    }
-//  }
-//}
-
 #input-form\:r.ui-selectonemenu {
   background-color: $input-background-color;
   border: 0;
@@ -130,14 +117,21 @@
 }
 
 
+
+#button-container{
+  display: flex;
+  flex-direction: row ;
+  gap: 1rem;
+  width: 100%;
+}
+
 #input-form\:submit-button {
   background-color: $accent-color;
   border: $accent-color;
-  margin: 10px 0;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
+  flex-grow: 1.5;
   font-size: 17px;
 
   .ui-button-text {
@@ -146,8 +140,10 @@
   }
   span.ui-button-icon-left.ui-icon.ui-c.far.fa-check-circle {
     position: relative;
-    margin: 2px 0 0 0;
+    margin: 4px 0 0 0;
     color: $main-text-color;
+    top: 0;
+    font-size: 18px;
     //justify-content: center;
     &.ui-state-focus {
       position: relative;
@@ -159,12 +155,37 @@
     box-shadow: 0 0 10px $accent-color;
   }
 }
-//
-//body .ui-button.ui-button-text-icon-left .ui-button-text {
-//  padding-left: 0;
-//}
 
+#input-form\:clear-form-button {
+  background-color: $clear-button-background-color;
+  border: $clear-button-background-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 0.5;
+  font-size: 17px;
 
+  .ui-button-text {
+    padding-left: 15px;
+    color: $clear-button-text-color;
+  }
+  &.ui-state-focus{
+    box-shadow: 0 0 10px $accent-color;
+  }
+  span.ui-button-icon-left.ui-icon.ui-c.fa.fa-rotate-right {
+    position: relative;
+    margin: 3px 0 0 0;
+    color: $clear-button-text-color;
+    top: 0;
+    font-size: 16px;
+    //justify-content: center;
+    &.ui-state-focus {
+      position: relative;
+      margin: 2px 0 0 0;
+      color: $clear-button-text-color;
+    }
+  }
+}
 
 
 
@@ -179,5 +200,6 @@ input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 
 

@@ -51,3 +51,29 @@ body .ui-datatable .ui-datatable-data tr {
   }
 }
 
+#top-of-table{
+  display: flex;
+  //flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  #clear-table-button {
+    width: 15rem;
+    height: fit-content;
+    background-color: $clear-button-background-color;
+    border: $clear-button-background-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //flex-grow: 0;
+    font-size: 17px;
+
+    .ui-button-text {
+      //padding-left: 15px;
+      color: $clear-button-text-color;
+    }
+    &.ui-state-focus{
+      box-shadow: 0 0 10px $accent-color;
+    }
+  }
+}
+

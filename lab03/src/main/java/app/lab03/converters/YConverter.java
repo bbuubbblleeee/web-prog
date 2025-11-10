@@ -14,7 +14,6 @@ public class YConverter implements Converter<Float> {
     @Override
     public Float getAsObject(FacesContext context, UIComponent component, String value) {
         log.info("YConverter called");
-        log.info(value);
         try{
             if (value == null){
 

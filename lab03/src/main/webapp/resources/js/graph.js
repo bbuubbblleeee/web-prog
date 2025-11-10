@@ -41,6 +41,7 @@ svg.addEventListener("click", event => {
 
 function drawPoint(point){
     if (point === undefined){
+        console.log("point undef")
         return
     }
     const xPiexels = +point.x * rPixels / +point.r + centerX
@@ -50,17 +51,26 @@ function drawPoint(point){
 
 
 function restorePoints(history){
+    console.log(history)
+    graph.innerHTML = ""
+    if (history === null) {
+        return;
+    }
     graph.innerHTML = ""
     const rSelect = document.querySelector("option[selected='selected']")
     if (rSelect === null){
         return;
     }
     rValue = +rSelect.value
+    console.log(rValue)
     history.forEach(point => {
         if (point.r === rValue){
+            console.log(point.r)
+
             drawPoint(point)
         }
     });
+    console.log("---")
 }
 
 function redrawGraph(){

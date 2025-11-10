@@ -16,16 +16,6 @@ function restoreX(x){
     })
 }
 
-
-// function restoreXAfterSubmit(){
-//     const xLinks = document.querySelectorAll("#x-values a");
-//     xLinks.forEach(xLink => {
-//         if (+xLink.innerHTML === +x) {
-//             xLink.classList.add('last')
-//             console.log(xLink.innerHTML)
-//         }
-//         else{
-//             xLink.classList.remove('last')
-//         }
-//     })
-// }
+function clearForm(){
+    restoreX(0)
+}
