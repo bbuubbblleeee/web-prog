@@ -8,8 +8,8 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
-@Getter
 @Setter
+@Getter
 @Named
 @Entity
 @Table(name = "point")

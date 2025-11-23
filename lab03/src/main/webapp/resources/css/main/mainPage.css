@@ -268,6 +268,25 @@ svg {
 #result-table .ui-datatable-tablewrapper table tbody tr td {
   color: #ffffff;
 }
+#result-table .ui-datatable-tablewrapper table tbody tr td.result {
+  vertical-align: center;
+}
+#result-table .ui-datatable-tablewrapper table tbody tr td.result .result-text {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  padding: 2px 9px;
+  border-radius: 16px;
+  font-size: 14px;
+}
+#result-table .ui-datatable-tablewrapper table tbody tr td.result .result-text.hit {
+  background-color: #143726;
+  color: #4ade80;
+}
+#result-table .ui-datatable-tablewrapper table tbody tr td.result .result-text.miss {
+  background-color: #3d1e21;
+  color: #f87171;
+}
 
 body .ui-datatable .ui-datatable-data tr {
   background: #111418;
@@ -297,7 +316,20 @@ body .ui-datatable .ui-datatable-data tr {
   align-items: center;
   font-size: 17px;
 }
+#top-of-table #clear-table-button span.ui-button-icon-left.ui-icon.ui-c.fas.fa-trash {
+  position: relative;
+  margin: 2px 0 0 0;
+  color: #c4b5fd;
+  top: 0;
+  font-size: 16px;
+}
+#top-of-table #clear-table-button span.ui-button-icon-left.ui-icon.ui-c.fas.fa-trash.ui-state-focus {
+  position: relative;
+  margin: 0 0 0 0;
+  color: #e3e4e6;
+}
 #top-of-table #clear-table-button .ui-button-text {
+  padding-left: 20px;
   color: #c4b5fd;
 }
 #top-of-table #clear-table-button.ui-state-focus {

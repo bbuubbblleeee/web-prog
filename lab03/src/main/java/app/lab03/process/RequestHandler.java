@@ -6,7 +6,9 @@ import app.lab03.data.Point;
 import app.lab03.validation.ValidationService;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.FacesException;
-import jakarta.faces.component.UIViewRoot;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.component.UIInput;
+import jakarta.faces.component.UISelectOne;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -79,8 +81,26 @@ public class RequestHandler implements Serializable {
     public void clearForm(Point point){
         log.info("clearForm called");
         point.setX(0F);
-        point.setY(null);
-        point.setR(0);
+
+        UIComponent rSelect = FacesContext.getCurrentInstance()
+                .getViewRoot()
+                .findComponent("input-form:r");
+        if (rSelect instanceof UISelectOne selectOne) {
+            selectOne.setSubmittedValue(null);
+            selectOne.setValue(null);
+            selectOne.setValid(true);
+        }
+
+        UIComponent yInput = FacesContext.getCurrentInstance()
+                .getViewRoot()
+                .findComponent("input-form:y");
+        if (yInput instanceof UIInput input) {
+            input.setValid(true);
+            input.setSubmittedValue(null);
+            input.setValue(null);
+
+        }
+
     }
 
     public void clearTable(){

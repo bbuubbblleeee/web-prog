@@ -60,9 +60,15 @@
                                  onclick="executeCalculation(); return false;"
                 />
                 <p:commandButton id="clear-form-button" value="Clear form"
-                                 action="#{requestHandler.clearForm(point)}" process="@this"
-                                 update="y r" onclick="clearForm()"
+                                 type="button"
+                                 onclick="clearFormButton();"
                                  icon="fa fa-rotate-right"/>
+                <p:remoteCommand name="clearFormButton"
+                                 action="#{requestHandler.clearForm(point)}"
+                                 process="@this"
+                                 update="y r"
+                                 oncomplete="clearForm(); restoreGraph(null);"
+                                 autoRun="false"/>
 
             </div>
             <p:remoteCommand name="executeCalculation"
@@ -173,9 +179,15 @@
     <div id="table-container">
         <div id="top-of-table">
             <h3>All submits</h3>
-            <p:commandButton id="clear-table-button" value="Clear table" action="#{requestHandler.clearTable()}"
+            <p:commandButton id="clear-table-button" value="Clear table"
+                             type="button" onclick="clearTableButton();"
+                             icon="fas fa-trash"
+                             />
+            <p:remoteCommand name="clearTableButton"
+                             action="#{requestHandler.clearTable()}"
                              update=":result-table" process="@this"
-                             oncomplete="restoreGraph(null)"/>
+                             oncomplete="restoreGraph(null)"
+            />
         </div>
         <p:dataTable id="result-table" styleClass="table" lazy="false" value="#{history.allRequests}" var="myPoint" emptyMessage="No data found">
             <p:column headerText="X">
@@ -191,8 +203,8 @@
             <p:column headerText="R" >
                 <h:outputText value="#{myPoint.r}"/>
             </p:column>
-            <p:column headerText="Result">
-                <h:outputText value="#{myPoint.result ? 'Hit' : 'Miss'}"/>
+            <p:column headerText="Result" styleClass="result">
+                <h:outputText styleClass="result-text #{myPoint.result ? 'hit' : 'miss'}" value="#{myPoint.result ? 'Hit' : 'Miss'}"/>
             </p:column>
             <p:column headerText="Current time">
                 <h:outputText value="#{myPoint.currentTime}"/>
@@ -222,7 +234,7 @@
     <h:outputScript>
         $(document).on('pfAjaxError', function (event, xhr, settings) {
             if (xhr.responseText &amp;&amp; xhr.responseText.includes("ViewExpiredException")) {
-            window.location.href = '/main';
+            window.location.href = '/';
             }
         });
     </h:outputScript>

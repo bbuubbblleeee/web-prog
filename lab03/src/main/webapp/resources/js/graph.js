@@ -41,7 +41,6 @@ svg.addEventListener("click", event => {
 
 function drawPoint(point){
     if (point === undefined){
-        console.log("point undef")
         return
     }
     const xPiexels = +point.x * rPixels / +point.r + centerX
@@ -51,7 +50,6 @@ function drawPoint(point){
 
 
 function restorePoints(history){
-    console.log(history)
     graph.innerHTML = ""
     if (history === null) {
         return;
@@ -62,20 +60,18 @@ function restorePoints(history){
         return;
     }
     rValue = +rSelect.value
-    console.log(rValue)
     history.forEach(point => {
         if (point.r === rValue){
-            console.log(point.r)
 
             drawPoint(point)
         }
     });
-    console.log("---")
 }
 
 function redrawGraph(){
     const rSelect = document.querySelector("option[selected='selected']")
-    if (rSelect === null){
+    if (rSelect === null || +rSelect.value === 0){
+        restoreDefault();
         return;
     }
     rValue = +rSelect.value
@@ -90,6 +86,20 @@ function redrawGraph(){
 
     const minusR = document.querySelectorAll(".-r")
     minusR.forEach(r => r.textContent = (-rValue).toString())
+}
+
+function restoreDefault(){
+    const halfR = document.querySelectorAll(".rDiv2")
+    halfR.forEach(r => r.textContent = "R/2")
+
+    const minusHalfR = document.querySelectorAll(".-rDiv2")
+    minusHalfR.forEach(r => r.textContent = "-R/2")
+
+    const r = document.querySelectorAll(".r")
+    r.forEach(r => r.textContent = "R")
+
+    const minusR = document.querySelectorAll(".-r")
+    minusR.forEach(r => r.textContent = "-R")
 }
 
 function restoreGraph(history){
